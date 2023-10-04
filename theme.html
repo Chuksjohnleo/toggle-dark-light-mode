@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle dark theme</title>
+    <style>
+        :root{
+            --text-color: black;
+            --bg-color: white;
+        }
+
+        :is(.dark){
+            --text-color: white;
+            --bg-color: black;
+        }
+
+        header{
+          position: sticky;
+          top: 0;
+          background-color: var(--bg-color);
+          padding: 5px;
+        }
+
+        nav{
+          display: flex;
+        justify-content: space-between;
+        }
+
+        code{
+          padding: 5px;
+          background-color: rgb(189, 188, 188);
+          border: 1px solid var(--text-color);
+          box-shadow: 0px 0px 10px inset blue;
+          display: inline-block;
+          border-radius: 12px;
+        }
+
+        pre code{
+          display: block;
+        }
+
+        html,
+        body{
+          background-color: var(--bg-color);
+          color: var(--text-color);
+        }
+
+        button{
+          font-weight: 900;
+        }
+
+        .active-mode-btn{
+          box-shadow: 0px 0px 200px inset blue;
+          color: rgb(0, 47, 255);
+        }
+
+        .successful-copy::after{
+          content: "copied!";
+          background-color: blue;
+          color: white;
+          display: inline-block;
+          padding: 5px;
+          position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div>Click the two buttons beside to choose your preferred theme</div>
+            <div>
+            <button id="light-mode-btn">Light</button>
+            <button id="dark-mode-btn">Dark</button>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <h1>Toggling between light and dark mode is simple</h1>
+        <div>How is it done?</div>
+        <div>You just need to declare your color css variables
+            in the root element using <code>:root</code> selector when in light mode and use the 
+            <code>is()</code> CSS function to indicate the colors when 
+            in dark mode.<br/>
+            <strong>Note:</strong> You can also do a reverse of the above if your default 
+            theme is dark.
+        </div>
+        <h1>Step by step guild</h1>
+        <h4>Step 1: declare your default CSS variables in the root element</h4>
+        <div>
+          <div class="multiline-code">
+           <button type="button" class="copy-button">Copy</button>
+           <pre>
+            <code>
+            :root{
+              --text-color: white;
+              --bg-color: black; 
+            }
+            </code>
+           </pre>
+          </div>
+        </div>
+        <h4>Step 2: declare your dark mode or alternate CSS variables in the root element</h4>
+        <div>
+          <div class="multiline-code">
+            <button type="button" class="copy-button">Copy</button>
+            <pre>
+             <code>
+            :is(.dark){
+                --text-color: white;
+                --bg-color: black;
+            }
+             </code>
+            </pre>
+          </div>
+       The is() function checks if a particular element has the attribute value such as 
+       classname passed to it as a parameter.
+       <strong>Note</strong> that the ":" signifies the root i.e html tag. So if the
+       html tag so if the html tag has a classname of "dark" then the styles inside is(.dark) selector
+       will be applied. In summary, the text color is black at default(light mode in this case) mode while 
+       it is white at dark mode.
+        </div>
+     <h4>Step 3: Use javascript to toggle between modes by toggle the classname of the html between light and dark</h4>
+     <div>
+      <div class="multiline-code">
+        <button type="button" class="copy-button">Copy</button>
+      <pre>
+        <code>
+      //make sure that page has loaded before executing the js code
+      window.addEventListener('DOMContentLoaded',()=>{
+      const darkModeBtn = document.getElementById('dark-mode-btn');
+      const lightModeBtn = document.getElementById('light-mode-btn');
+       
+      function useDarkMode(){
+        document.documentElement.classList.remove('light');//remove "light" class
+        document.documentElement.classList.add('dark');//add "dark" class
+      }
+
+      function useLightMode(){
+        document.documentElement.classList.remove('dark');//remove "dark" class
+        document.documentElement.classList.add('light');//add "light" class
+      }
+
+      if(localStorage.getItem('theme')){
+        if(localStorage.getItem('theme') === 'dark'){
+            useDarkMode();
+        }else{
+            useLightMode();
+        }
+       }
+
+      lightModeBtn.addEventListener('click', useLightMode);
+      darkModeBtn.addEventListener('click', useDarkMode)
+      })  
+      </code>
+     </pre>
+    </div>
+     You can use localStorage api or database to save user preferences.
+     <div>
+      <div class="multiline-code">
+        <button type="button" class="copy-button">Copy</button>
+      <pre>
+        <code>
+      //make sure that page has loaded before executing the js code
+      window.addEventListener('DOMContentLoaded',()=>{
+      const darkModeBtn = document.getElementById('dark-mode-btn');
+      const lightModeBtn = document.getElementById('light-mode-btn');
+       
+      function useDarkMode(){
+        document.documentElement.classList.remove('light');//remove "light" class
+        document.documentElement.classList.add('dark');//add "dark" class
+        localStorage.setItem('theme', 'dark');
+      }
+
+      function useLightMode(){
+        document.documentElement.classList.remove('dark');//remove "dark" class
+        document.documentElement.classList.add('light');//add "light" class
+        localStorage.setItem('theme', 'light');
+      }
+
+      if(localStorage.getItem('theme')){
+        if(localStorage.getItem('theme') === 'dark'){
+            useDarkMode();
+        }else{
+            useLightMode();
+        }
+       }
+
+      lightModeBtn.addEventListener('click', useLightMode);
+      darkModeBtn.addEventListener('click', useDarkMode)
+      })  
+     </code>
+    </pre>
+  </div>
+  </div>
+    </div>
+    <textarea id="copy" placeholder="here"></textarea>
+    <script>
+        //make sure that page has loaded before executing the js code
+        window.addEventListener('DOMContentLoaded',()=>{
+        const darkModeBtn = document.getElementById('dark-mode-btn');
+        const lightModeBtn = document.getElementById('light-mode-btn');
+         
+        function useDarkMode(){
+          document.documentElement.classList.remove('light');//remove "light" class
+          document.documentElement.classList.add('dark');//add "dark" class
+          localStorage.setItem('theme', 'dark');
+          lightModeBtn.classList.remove('active-mode-btn');
+          darkModeBtn.classList.add('active-mode-btn');
+        }
+
+        function useLightMode(){
+          document.documentElement.classList.remove('dark');//remove "dark" class
+          document.documentElement.classList.add('light');//add "light" class
+          localStorage.setItem('theme', 'light');
+          darkModeBtn.classList.remove('active-mode-btn');
+          lightModeBtn.classList.add('active-mode-btn');
+        }
+
+        if(localStorage.getItem('theme')){
+          if(localStorage.getItem('theme') === 'dark'){
+              useDarkMode();
+          }else{
+              useLightMode();
+          }
+         }
+
+        lightModeBtn.addEventListener('click', useLightMode);
+        darkModeBtn.addEventListener('click', useDarkMode);
+
+        function printCopied(e){
+           e.target.classList.add('successful-copy');
+           setTimeout(()=>{
+            e.target.classList.remove('successful-copy');
+           },3000);
+        }
+
+        const copy = document.getElementById('copy');
+        const multilineCodes = document.querySelectorAll('.multiline-code');
+       
+        multilineCodes.forEach((e,i)=>{
+          const copyButton = multilineCodes[i].querySelector('.copy-button');
+          const pre = multilineCodes[i].querySelector('pre');
+         
+          copyButton.addEventListener('click',(e)=>{
+            copy.value = pre.innerText
+            console.log(pre)
+            copy.select();
+            document.execCommand("copy");
+            printCopied(e)
+          })
+        });
+        // for(i=0; i < multilineCodes.length; i++){
+        //   const copyButton = multilineCodes[i]
+        //   .querySelector('.copy-button');
+        //   copyButton.addEventListener('click',()=>{
+        //     console.log(i)
+        //   })
+        // }
+        })  
+    </script>
+</body>
+</html>
