@@ -20,6 +20,7 @@
           top: 0;
           background-color: var(--bg-color);
           padding: 5px;
+          z-index: 2;
         }
 
         nav{
@@ -29,8 +30,8 @@
 
         code{
           padding: 5px;
-          background-color: rgb(189, 188, 188);
-          border: 1px solid var(--text-color);
+          font-weight: 600;
+          font-family: monospace;
           box-shadow: 0px 0px 10px inset blue;
           display: inline-block;
           border-radius: 12px;
@@ -48,10 +49,11 @@
 
         button{
           font-weight: 900;
+          cursor: pointer;
         }
 
         .active-mode-btn{
-          box-shadow: 0px 0px 200px inset blue;
+          box-shadow: 0px 0px 10px inset blue;
           color: rgb(0, 47, 255);
         }
 
@@ -62,6 +64,27 @@
           display: inline-block;
           padding: 5px;
           position: absolute;
+        }
+
+        .copy-button{
+         position: sticky;
+         top: 30px;
+         margin-top: 10px;
+        }
+
+        #copy{
+          width: 0;
+          height: 0;
+        }
+
+        footer{
+          border-top: 1px solid black;
+          padding: 10px;
+          text-align: center;
+        }
+
+        a{
+          text-decoration: none;
         }
     </style>
 </head>
@@ -113,10 +136,10 @@
              </code>
             </pre>
           </div>
-       The is() function checks if a particular element has the attribute value such as 
+       The <code>is()</code> function checks if a particular element has the attribute value such as 
        classname passed to it as a parameter.
        <strong>Note</strong> that the ":" signifies the root i.e html tag. So if the
-       html tag so if the html tag has a classname of "dark" then the styles inside is(.dark) selector
+       html tag so if the html tag has a classname of "dark" then the styles inside <code>is(.dark)</code> selector
        will be applied. In summary, the text color is black at default(light mode in this case) mode while 
        it is white at dark mode.
         </div>
@@ -155,7 +178,7 @@
       </code>
      </pre>
     </div>
-     You can use localStorage api or database to save user preferences.
+     You can use <code>localStorage</code> api or database to save user preferences.
      <div>
       <div class="multiline-code">
         <button type="button" class="copy-button">Copy</button>
@@ -195,6 +218,8 @@
   </div>
     </div>
     <textarea id="copy" placeholder="here"></textarea>
+    <footer>
+      <p>Made by <a href="https://chuksjohnleo.github.io">Chuksjohnleo</a></p>
     <script>
         //make sure that page has loaded before executing the js code
         window.addEventListener('DOMContentLoaded',()=>{
