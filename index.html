@@ -15,6 +15,17 @@
             --bg-color: black;
         }
 
+        html,
+        body{
+          background-color: var(--bg-color);
+          color: var(--text-color);
+        }
+
+        .root{
+          max-width: 600px;
+          margin: auto;
+        }
+
         header{
           position: sticky;
           top: 0;
@@ -39,12 +50,7 @@
 
         pre code{
           display: block;
-        }
-
-        html,
-        body{
-          background-color: var(--bg-color);
-          color: var(--text-color);
+          overflow: auto;
         }
 
         button{
@@ -98,7 +104,7 @@
             </div>
         </nav>
     </header>
-    <div>
+    <div class="root">
         <h1>Toggling between light and dark mode is simple</h1>
         <div>How is it done?</div>
         <div>You just need to declare your color css variables
